@@ -4,10 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import spring_mvc_hibernate.model.User;
 import spring_mvc_hibernate.service.UserService;
 
@@ -32,7 +29,7 @@ public class UserController {
         return "all-users";
     }
 
-    @RequestMapping("/addNewUser")
+    @GetMapping("/addNewUser")
     public String addNewUser(Model model) {
 
         User user = new User();
@@ -41,7 +38,7 @@ public class UserController {
         return "user-info";
     }
 
-    @RequestMapping("/saveNewUser")
+    @PostMapping("/saveNewUser")
     public String saveNewUser(@ModelAttribute("user") User user) {
 
         userService.add(user);
@@ -49,7 +46,7 @@ public class UserController {
         return "redirect:/";
     }
 
-    @RequestMapping("/updateUser")
+    @GetMapping("/updateUser")
     public String updateUser(@RequestParam("userID") Integer id,
                              Model model) {
 
@@ -59,7 +56,7 @@ public class UserController {
         return "user-info";
     }
 
-    @RequestMapping("/deleteUser")
+    @GetMapping("/deleteUser")
     public String deleteUser(@RequestParam("userID") Integer id) {
 
         userService.delete(id);
