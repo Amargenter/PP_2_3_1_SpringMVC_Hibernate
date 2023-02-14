@@ -23,7 +23,7 @@ import java.util.Properties;
 @EnableTransactionManagement
 @ComponentScan(value = "spring_mvc_hibernate")
 public class JavaConfig {
-    private Environment environment;
+    private final Environment environment;
 
     @Autowired
     public JavaConfig(Environment environment) {

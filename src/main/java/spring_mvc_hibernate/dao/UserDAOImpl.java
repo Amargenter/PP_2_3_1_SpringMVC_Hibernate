@@ -1,22 +1,19 @@
 package spring_mvc_hibernate.dao;
 
-import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.stereotype.Service;
 import spring_mvc_hibernate.model.User;
 
 import javax.persistence.*;
 import java.util.List;
 
-@Repository
+@Service
 public class UserDAOImpl implements UserDAO {
 
     @PersistenceContext
     private EntityManager em;
 
     @Override
-    @Transactional
     public List<User> getAllUsers() {
-
         return em.createQuery("SELECT u FROM User u", User.class)
                 .getResultList();
     }
@@ -34,7 +31,6 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public void delete(Integer id) {
-
         User user = em.find(User.class, id);
         em.remove(user);
         em.flush();
@@ -42,7 +38,6 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public User getById(Integer id) {
-
         return em.find(User.class, id);
     }
 }
