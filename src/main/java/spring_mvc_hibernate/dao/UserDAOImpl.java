@@ -1,12 +1,12 @@
 package spring_mvc_hibernate.dao;
 
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Repository;
 import spring_mvc_hibernate.model.User;
 
 import javax.persistence.*;
 import java.util.List;
 
-@Service
+@Repository
 public class UserDAOImpl implements UserDAO {
 
     @PersistenceContext
@@ -19,14 +19,13 @@ public class UserDAOImpl implements UserDAO {
     }
     @Override
     public void add(User user) {
-
-        if (user.getId() == null) {
         em.persist(user);
         em.flush();
-        } else {
-            em.merge(user);
-            em.flush();
-        }
+    }
+
+    public void update(User user) {
+        em.merge(user);
+        em.flush();
     }
 
     @Override
